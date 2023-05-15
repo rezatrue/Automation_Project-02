@@ -69,6 +69,9 @@ class Gui:
         buttonSwitchToIframe = tk.Button(root, text="Switch To Iframe", command=self.switchToIframe)
         buttonSwitchToIframe.grid(row=6, column=2)
 
+        buttonBackFromIframe = tk.Button(root, text="Back From Iframe", command=self.backFromIframe)
+        buttonBackFromIframe.grid(row=6, column=3)
+
         root.mainloop()
 
     def myClick(self):
@@ -234,5 +237,8 @@ class Gui:
 
         WebDriverWait(self.driver, 20).until(
             expected_conditions.frame_to_be_available_and_switch_to_it(self.driver.find_element(By.XPATH, self.inputXPath.get())))
-
         pass
+
+    def backFromIframe(self):
+        self.driver.switch_to.default_content()
+

@@ -104,10 +104,14 @@ class RegisterUser:
         time.sleep(5)
         gAddUrl = self.accountCreatedPage.googeAddUrl
         if self.browserAction.getCurrentUrl() == gAddUrl:
+            time.sleep(15)
             iframes = self.accountCreatedPage.getAswift_IframesWE()
             if len(iframes) > 0:
                 for frame in iframes:
                     if self.browserAction.switchToIframe(frame):
+                        if self.browserAction.isPresent(self.accountCreatedPage.getCloseAddBtn1WE()):
+                            self.browserAction.clickAndWait(self.accountCreatedPage.getCloseAddBtn1WE())
+                            break
                         if self.browserAction.switchToIframe(self.accountCreatedPage.getAdIframeWE()):
                             self.browserAction.clickAndWait(self.accountCreatedPage.getCloseAddButtonWE())
                         else:

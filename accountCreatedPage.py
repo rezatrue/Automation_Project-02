@@ -13,6 +13,7 @@ class AccountCreatedPage:
         self.aswift_IframesXpath = "//iframe[contains(@id,'aswift_')]"
         self.adIframeXpath = "//iframe[@id='ad_iframe']"
         self.closeAddButtonXPath = "//div[@id='dismiss-button']/div/span"
+        self.closeAddBtn1XPath = "//div[@id='dismiss-button']//*[name()='path'][1]"
         pass
 
     def getPageUrl(self):
@@ -38,3 +39,6 @@ class AccountCreatedPage:
 
     def getCloseAddButtonWE(self):
         return self.driver.find_element(By.XPATH, self.closeAddButtonXPath)
+
+    def getCloseAddBtn1WE(self):
+        return self.driver.find_element(By.XPATH, self.closeAddBtn1XPath)

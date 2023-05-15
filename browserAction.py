@@ -68,14 +68,14 @@ class BrowserAction:
         # driver.switch_to.frame(driver.find_element(By.XPATH, "//iframe[@id='upload_file_frame']"))
         try:
             WebDriverWait(self.driver, 20).until(
-                expected_conditions.frame_to_be_available_and_switch_to_it(self.driver.find_element(By.XPATH, self.inputXPath.get())))
+                expected_conditions.frame_to_be_available_and_switch_to_it(iframeXpath))
         except:
             print("failed to switch to iframe: ")
             return False
         return True
 
     def switchBackFromIframe(self):
-        self.driver.switchTo().defaultContent();
+        self.driver.switch_to.default_content()
         pass
 
     def getCurrentUrl(self):
