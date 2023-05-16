@@ -56,7 +56,7 @@ class BrowserAction:
         try:
             element = we
             if element is not None:
-                print("Found in the page")
+                print("Element present in the page")
         except NoSuchElementException:
             print("Not in the current DOM")
             return False

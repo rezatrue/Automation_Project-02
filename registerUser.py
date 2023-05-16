@@ -1,12 +1,12 @@
 import time
 
-from accountCreatedPage import AccountCreatedPage
+from pages.accountCreatedPage import AccountCreatedPage
 from base import Base
 from browserAction import BrowserAction
-from deleteAccountPage import DeleteAccountPage
-from homepage import HomePage
-from loginPage import LoginPage
-from signupPage import SignupPage
+from pages.deleteAccountPage import DeleteAccountPage
+from pages.homepage import HomePage
+from pages.loginPage import LoginPage
+from pages.signupPage import SignupPage
 
 
 class RegisterUser:
