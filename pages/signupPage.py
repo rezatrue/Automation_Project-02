@@ -1,10 +1,15 @@
+import time
+
 from selenium.webdriver.common.by import By
 
+from base.base_driver import BaseDriver
 
-class SignupPage:
+
+class SignupPage(BaseDriver):
 
     def __init__(self, driver):
         self.driver = driver
+        super().__init__(driver)
         self.url = "https://automationexercise.com/signup"
         self.signupFormTitleXPath = "//div[@class='login-form']/h2"
         self.signupFormExpectedTitle = "Enter Account Information"
@@ -78,3 +83,27 @@ class SignupPage:
 
     def getBtnCreateAccountWE(self):
         return self.driver.find_element(By.XPATH, self.btnCreateAccountXPath)
+
+    def getSignUpFormTitleText(self):
+        return BaseDriver.getText(self.getSignUpFormTitleWE())
+        pass
+
+    def fillupAccountInformationForm(self, title, password, date, month, year, firstname, lastname, address, country, statetx, city, ziptx, phone):
+        BaseDriver.clickOnWe(self.getGenderInputWE(title))
+        BaseDriver.inputText(self.getPasswordWE(), password)
+        BaseDriver.selectDropdownItem(self.getDaysWE(), date)
+        BaseDriver.selectDropdownItem(self.getMonthsWE(), month)
+        BaseDriver.selectDropdownItem(self.getYearsWE(), year)
+        BaseDriver.inputText(self.getFirstNameWE(), firstname)
+        BaseDriver.inputText(self.getLastNameWE(), lastname)
+        BaseDriver.inputText(self.getAddress1WE(), address)
+        BaseDriver.selectDropdownItem(self.getCountryWE(), country)
+        BaseDriver.inputText(self.getStateWE(), statetx)
+        BaseDriver.inputText(self.getCityWE(), city)
+        BaseDriver.inputText(self.getZipcodeWE(), ziptx)
+        BaseDriver.inputText(self.getPhoneWE(), phone)
+        BaseDriver.scrollToElement(self.getBtnCreateAccountWE())
+        time.sleep(2)
+        BaseDriver.clickAndWait(self.getBtnCreateAccountWE())
+
+        pass

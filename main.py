@@ -12,15 +12,7 @@ def print_hi(name):
     # Use a breakpoint in the code line below to debug your script.
     print(f'Hi I\'m , {name}')  # Press Ctrl+F8 to toggle the breakpoint.
     # Gui(Base())
-
-    registerUser = RegisterUser()
-    registerUser.verifyPageIsvisible()
-    registerUser.verifyNewUserSignUp()
-    registerUser.verifyAccountInformation()
-    registerUser.verifyAccountInformationFormSubimision()
-    registerUser.deleteAccount()
-    registerUser.closeBrowser()
-
+    RegisterUser()
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':

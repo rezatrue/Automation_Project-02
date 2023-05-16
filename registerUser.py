@@ -141,5 +141,12 @@ class RegisterUser:
 
         if self.browserAction.isPresent(self.homepage.getSignUpButtonWE()):
             print("Account successfully Deleted")
-
         pass
+
+registerUser = RegisterUser()
+registerUser.verifyPageIsvisible()
+registerUser.verifyNewUserSignUp()
+registerUser.verifyAccountInformation()
+registerUser.verifyAccountInformationFormSubimision()
+registerUser.deleteAccount()
+registerUser.closeBrowser()
