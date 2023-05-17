@@ -5,7 +5,6 @@ from base.base_driver import BaseDriver
 class SignupPage(BaseDriver):
 
     def __init__(self, driver):
-        self.driver = driver
         super().__init__(driver)
         self.url = "https://automationexercise.com/signup"
         self.signupFormTitleXPath = "//div[@class='login-form']/h2"
@@ -24,6 +23,7 @@ class SignupPage(BaseDriver):
         self.zipcodeXPath = "//input[@id='zipcode']"
         self.phoneXPath = "//input[@id='mobile_number']"
         self.btnCreateAccountXPath = "//button[text()='Create Account']"
+        self.footerXPath = "//footer[@id='footer']"
         pass
 
     def getPageUrl(self):
@@ -82,26 +82,29 @@ class SignupPage(BaseDriver):
         return self.driver.find_element(By.XPATH, self.btnCreateAccountXPath)
 
     def getSignUpFormTitleText(self):
-        return BaseDriver.getText(self.getSignUpFormTitleWE())
+        return self.getText(self.getSignUpFormTitleWE())
+        pass
+
+    def getFooterWE(self):
+        return self.driver.find_element(self.footerXPath)
         pass
 
     def fillupAccountInformationForm(self, title, password, date, month, year, firstname, lastname, address, country, statetx, city, ziptx, phone):
-        BaseDriver.clickOnWe(self.getGenderInputWE(title))
-        BaseDriver.inputText(self.getPasswordWE(), password)
-        BaseDriver.selectDropdownItem(self.getDaysWE(), date)
-        BaseDriver.selectDropdownItem(self.getMonthsWE(), month)
-        BaseDriver.selectDropdownItem(self.getYearsWE(), year)
-        BaseDriver.inputText(self.getFirstNameWE(), firstname)
-        BaseDriver.inputText(self.getLastNameWE(), lastname)
-        BaseDriver.inputText(self.getAddress1WE(), address)
-        BaseDriver.selectDropdownItem(self.getCountryWE(), country)
-        BaseDriver.inputText(self.getStateWE(), statetx)
-        BaseDriver.inputText(self.getCityWE(), city)
-        BaseDriver.inputText(self.getZipcodeWE(), ziptx)
-        BaseDriver.inputText(self.getPhoneWE(), phone)
-        BaseDriver.scrollToElement(self.getBtnCreateAccountWE())
-        BaseDriver.waitForSecond(2)
-        BaseDriver.clickOnWe(self.getBtnCreateAccountWE())
-        BaseDriver.waitForSecond(2)
+        self.clickOnWe(self.getGenderInputWE(title))
+        self.inputText(self.getPasswordWE(), password)
+        self.selectDropdownItem(self.getDaysWE(), date)
+        self.selectDropdownItem(self.getMonthsWE(), month)
+        self.selectDropdownItem(self.getYearsWE(), year)
+        self.inputText(self.getFirstNameWE(), firstname)
+        self.inputText(self.getLastNameWE(), lastname)
+        self.inputText(self.getAddress1WE(), address)
+        self.selectDropdownItem(self.getCountryWE(), country)
+        self.inputText(self.getStateWE(), statetx)
+        self.inputText(self.getCityWE(), city)
+        self.waitForSecond(5)
+        self.inputText(self.getZipcodeWE(), ziptx)
+        self.inputText(self.getPhoneWE(), phone)
+        self.waitForSecond(2)
+        self.clickAndWait(self.getBtnCreateAccountWE())
 
         pass

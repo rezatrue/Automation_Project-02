@@ -5,68 +5,65 @@ from base.base_driver import BaseDriver
 class AccountCreatedPage(BaseDriver):
 
     def __init__(self, driver):
-        self.driver = driver
         super().__init__(driver)
-        self.url = "https://automationexercise.com/account_created"
-        self.titleXPath = "//section[@id='form']//h2"
-        self.pageTitle = "Account Created!"
-        self.continueButtonXPath = "//a[text()='Continue']"
-        self.googeAddUrl = "https://automationexercise.com/account_created#google_vignette"
-        self.aswift_IframesXpath = "//iframe[contains(@id,'aswift_')]"
-        self.adIframeXpath = "//iframe[@id='ad_iframe']"
-        self.closeAddButtonXPath = "//div[@id='dismiss-button']/div/span"
-        self.closeAddBtn1XPath = "//div[@id='dismiss-button']//*[name()='path'][1]"
+        self.__url = "https://automationexercise.com/account_created"
+        self.__titleXPath = "//section[@id='form']//h2"
+        self.__pageTitle = "Account Created!"
+        self.__continueButtonXPath = "//a[text()='Continue']"
+        self.__googeAddUrl = "https://automationexercise.com/account_created#google_vignette"
+        self.__aswift_IframesXpath = "//iframe[contains(@id,'aswift_')]"
+        self.__adIframeXpath = "//iframe[@id='ad_iframe']"
+        self.__closeAddButtonXPath = "//div[@id='dismiss-button']/div/span"
+        self.__closeAddBtn1XPath = "//div[@id='dismiss-button']//*[name()='path'][1]"
         pass
 
     def getPageUrl(self):
-        return self.url
+        return self.__url
 
     def getPageTitleWE(self):
-        return self.driver.find_element(By.XPATH, self.titleXPath)
+        return self.driver.find_element(By.XPATH, self.__titleXPath)
 
     def getPageTitle(self):
-        return self.pageTitle
+        return self.__pageTitle
 
     def getContinueButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.continueButtonXPath)
+        return self.driver.find_element(By.XPATH, self.__continueButtonXPath)
 
     def getGoogleAddUrl(self):
-        return self.googeAddUrl
+        return self.__googeAddUrl
 
     def getAswift_IframesWE(self):
-        return self.driver.find_elements(By.XPATH, self.aswift_IframesXpath)
+        return self.driver.find_elements(By.XPATH, self.__aswift_IframesXpath)
 
     def getAdIframeWE(self):
-        return self.driver.find_element(By.XPATH, self.adIframeXpath)
+        return self.driver.find_element(By.XPATH, self.__adIframeXpath)
 
     def getCloseAddButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.closeAddButtonXPath)
+        return self.driver.find_element(By.XPATH, self.__closeAddButtonXPath)
 
     def getCloseAddBtn1WE(self):
-        return self.driver.find_element(By.XPATH, self.closeAddBtn1XPath)
+        return self.driver.find_element(By.XPATH, self.__closeAddBtn1XPath)
 
     def getPageTitleText(self):
-        return BaseDriver.getText(self.getPageTitleWE())
+        return self.getText(self.getPageTitleWE())
 
     def clickRegistrationContinueButton(self):
-        BaseDriver.clickOnWe(self.getContinueButtonWE())
-        BaseDriver.waitForSecond(2)
+        self.clickOnWe(self.getContinueButtonWE())
+        self.waitForSecond(2)
 
-        gAddUrl = self.googeAddUrl
-        if BaseDriver.getCurrentUrl() == gAddUrl:
-            BaseDriver.waitForSecond(2)
+        gAddUrl = self.__googeAddUrl
+        if self.getCurrentUrl() == gAddUrl:
+            self.waitForSecond(2)
             iframes = self.getAswift_IframesWE()
             if len(iframes) > 0:
                 for frame in iframes:
-                    if BaseDriver.switchToIframe(frame):
-                        if BaseDriver.isPresent(self.getCloseAddBtn1WE()):
-                            BaseDriver.clickOnWe(self.getCloseAddBtn1WE())
-                            BaseDriver.waitForSecond(2)
+                    if self.switchToIframe(frame):
+                        if self.isPresent(self.getCloseAddBtn1WE()):
+                            self.clickAndWait(self.getCloseAddBtn1WE())
                             break
-                        if BaseDriver.switchToIframe(self.getAdIframeWE()):
-                            BaseDriver.clickOnWe(self.getCloseAddButtonWE())
-                            BaseDriver.waitForSecond(2)
+                        if self.switchToIframe(self.getAdIframeWE()):
+                            self.clickAndWait(self.getCloseAddButtonWE())
                         else:
-                            BaseDriver.switchBackFromIframe()
+                            self.switchBackFromIframe()
             else:
                 print("No Add Iframe detected")

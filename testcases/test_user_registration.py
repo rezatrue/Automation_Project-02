@@ -26,7 +26,7 @@ class TestUserRegistration:
     @pytest.mark.fourth
     def testVerifyAccountInformationFormSubimision(self):
         self.signupPage.fillupAccountInformationForm('mr', "password", "1", "January", "2000", "firstname", "lastname",
-                                                     "House #1, Road #1", "United States", "New York", "11201",
+                                                     "House #1, Road #1", "United States", "New York", "New York city", "11201",
                                                      '+18801244589')
 
         titleExpected = self.accountCreatedPage.getPageTitle()

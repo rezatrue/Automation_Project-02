@@ -6,7 +6,6 @@ class LoginPage(BaseDriver):
 
     def __init__(self, driver):
         super().__init__(driver)
-        self.driver = driver
         self.__url = "https://automationexercise.com/login"
         self.__signUpFormXPath = "//div[@class='signup-form']/h2[text()='New User Signup!']"
         self.__nameInputXPath = "//div[@class='signup-form']//input[@name='name']"
@@ -16,9 +15,7 @@ class LoginPage(BaseDriver):
         pass
 
     def getPageUrl(self):
-        return self.url
-    def getPageBodyWE(self):
-        return self.driver.find_element(By.TAG_NAME, self.__htmlBodyTag)
+        return self.__url
 
     def getSignUpFormWE(self):
         return self.driver.find_element(By.XPATH, self.__signUpFormXPath)
@@ -33,8 +30,8 @@ class LoginPage(BaseDriver):
         return self.driver.find_element(By.XPATH, self.__signupButtonXPath)
 
     def fillupSignupForm(self, name, email):
-        BaseDriver.inputText(self.getNameInputWE(), name)
-        BaseDriver.inputText(self.getEmailInputWE(), email)
-        BaseDriver.waitForSecond(2)
-        BaseDriver.clickAndWait(self.getSignupButtonWE(), self.__htmlBodyTag)
+        self.inputText(self.getNameInputWE(), name)
+        self.inputText(self.getEmailInputWE(), email)
+        self.waitForSecond(2)
+        self.clickAndWait(self.getSignupButtonWE())
         pass

@@ -28,14 +28,9 @@ class BaseDriver:
             return False
         pass
 
-    def clickAndWait(self, sbwe, tag):
+    def clickAndWait(self, sbwe):
         sbwe.click()
-        wait = WebDriverWait(self.driver, 10)
-        try:
-            wait.until(expected_conditions.visibility_of_element_located((By.TAG_NAME, tag)))
-            return True
-        except TimeoutException:
-            return False
+        self.waitForSecond(3)
         pass
 
     def inputText(self, we, text):
@@ -56,8 +51,9 @@ class BaseDriver:
         ddelement.select_by_visible_text(opt)
 
     def scrollToElement(self, we):
-        actions = ActionChains(self.driver)
-        actions.move_to_element(we).perform()
+        # actions = ActionChains(self.driver)
+        # actions.move_to_element(we).perform()
+        self.driver.execute_script("arguments[0].scrollIntoView();", we)
 
     def switchToIframe(self, iframeXpath):
         # driver.switch_to.frame("ID")
