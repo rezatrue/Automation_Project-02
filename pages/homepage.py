@@ -8,15 +8,15 @@ class HomePage(BaseDriver):
     def __init__(self, driver):
         super().__init__(driver)
         self.driver = driver
-        self.__url = "https://automationexercise.com/"
+        self.url = "https://automationexercise.com/"
         self.__SignUpXPath = "//a[contains(text(),'Signup / Login')]"
         self.__deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"
         self.__logoutBtnXPath = "//a[contains(text(),'Logout')]"
-        self.__htmlBodyTag = "body"
+        self.htmlBodyTag = "body"
         pass
 
     def getPageUrl(self):
-        return self.__url
+        return self.url
 
     def getPageBodyWE(self):
         return self.driver.find_element(By.TAG_NAME, self.__htmlBodyTag)
@@ -30,10 +30,21 @@ class HomePage(BaseDriver):
     def getDeleteAccountButtonWE(self):
         return self.driver.find_element(By.XPATH, self.__deleteAccountBtnXPath)
 
-    def openUrl(self):
-        return BaseDriver.openUrlAndCheck(self.getPageUrl(), self.getPageBodyWE())
+    def openPageUrl(self):
+        return BaseDriver.openUrlAndCheck(self.getPageUrl(), self.htmlBodyTag)
         pass
 
     def clickOnSignupButton(self):
-        return BaseDriver.clickAndWait(self.getSignUpButtonWE(), self.getPageBodyWE())
+        return BaseDriver.clickAndWait(self.getSignUpButtonWE(), self.__htmlBodyTag)
         pass
+
+    def clickOnDeleteAccountButton(self):
+        return BaseDriver.clickAndWait(self.getDeleteAccountButtonWE(), self.__SignUpXPath)
+        pass
+
+    def isLogoutButtonPresent(self):
+        return BaseDriver.isPresent(self.getLogoutButtonWE())
+        pass
+
+    def isSignUpButtonPresent(self):
+        return BaseDriver.isPresent(self.getSignUpButtonWE())

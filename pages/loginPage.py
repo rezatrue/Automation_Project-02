@@ -1,7 +1,4 @@
-import time
-
 from selenium.webdriver.common.by import By
-
 from base.base_driver import BaseDriver
 
 
@@ -38,6 +35,6 @@ class LoginPage(BaseDriver):
     def fillupSignupForm(self, name, email):
         BaseDriver.inputText(self.getNameInputWE(), name)
         BaseDriver.inputText(self.getEmailInputWE(), email)
-        time.sleep(1)
-        BaseDriver.clickAndWait(self.getSignupButtonWE(), self.getPageBodyWE())
+        BaseDriver.waitForSecond(2)
+        BaseDriver.clickAndWait(self.getSignupButtonWE(), self.__htmlBodyTag)
         pass

@@ -7,7 +7,7 @@ import pytest
 class TestUserRegistration:
     @pytest.mark.first
     def testVerifyPageIsvisible(self):
-        res = self.homepage.openUrl()
+        res = self.homepage.openPageUrl()
         assert res
 
     @pytest.mark.second
@@ -21,11 +21,13 @@ class TestUserRegistration:
         self.loginPage.fillupSignupForm("name", "mail123981@yahoo.com")
         actualTitle = self.signupPage.getSignUpFormTitleText()
         expectedTitle = self.signupPage.getSignupFormExpectedTitle()
-        assert(actualTitle.lower() == expectedTitle.lower())
+        assert (actualTitle.lower() == expectedTitle.lower())
 
     @pytest.mark.fourth
     def testVerifyAccountInformationFormSubimision(self):
-        self.signupPage.fillupAccountInformationForm('mr', "password", "1", "January", "2000", "firstname", "lastname", "House #1, Road #1", "United States", "New York", "11201", '+18801244589')
+        self.signupPage.fillupAccountInformationForm('mr', "password", "1", "January", "2000", "firstname", "lastname",
+                                                     "House #1, Road #1", "United States", "New York", "11201",
+                                                     '+18801244589')
 
         titleExpected = self.accountCreatedPage.getPageTitle()
         titleActual = self.browserAction.getPageTitleText()
@@ -36,24 +38,24 @@ class TestUserRegistration:
 
     @pytest.mark.fifth
     def testDeleteAccount(self):
-        ep = self.browserAction.isPresent(self.homepage.getLogoutButtonWE())
+        ep = self.homepage.isLogoutButtonPresent()
         if ep:
             print("Logged in as username")
         else:
             print("Not logged in")
 
-        self.browserAction.clickAndWait(self.homepage.getDeleteAccountButtonWE())
+        self.homepage.clickOnDeleteAccountButton()
 
-        actualText = self.browserAction.getText(self.deleteAccountPage.getPageTitleWE()).lower()
+        actualText = self.deleteAccountPage.getPageTitle().lower()
         expectedText = self.deleteAccountPage.getPageTitle().lower()
         if expectedText in actualText:
             print("Page title match")
         else:
             print("No such Page title present")
-        time.sleep(5)
-        self.browserAction.clickAndWait(self.deleteAccountPage.getContinueButtonWE())
+        self.deleteAccountPage.clickOnContinueButton()
+        time.sleep(2)
 
-        if self.browserAction.isPresent(self.homepage.getSignUpButtonWE()):
+        if self.homepage.isSignUpButtonPresent():
             print("Account successfully Deleted")
 
         assert (actualText == expectedText)

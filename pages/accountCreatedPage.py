@@ -1,5 +1,4 @@
 from selenium.webdriver.common.by import By
-
 from base.base_driver import BaseDriver
 
 
@@ -50,21 +49,24 @@ class AccountCreatedPage(BaseDriver):
         return BaseDriver.getText(self.getPageTitleWE())
 
     def clickRegistrationContinueButton(self):
-        BaseDriver.clickAndWait(self.getContinueButtonWE())
-        time.sleep(2)
+        BaseDriver.clickOnWe(self.getContinueButtonWE())
+        BaseDriver.waitForSecond(2)
+
         gAddUrl = self.googeAddUrl
-        if self.getCurrentUrl() == gAddUrl:
-            time.sleep(2)
-            iframes = self.accountCreatedPage.getAswift_IframesWE()
+        if BaseDriver.getCurrentUrl() == gAddUrl:
+            BaseDriver.waitForSecond(2)
+            iframes = self.getAswift_IframesWE()
             if len(iframes) > 0:
                 for frame in iframes:
-                    if self.browserAction.switchToIframe(frame):
-                        if self.browserAction.isPresent(self.accountCreatedPage.getCloseAddBtn1WE()):
-                            self.browserAction.clickAndWait(self.accountCreatedPage.getCloseAddBtn1WE())
+                    if BaseDriver.switchToIframe(frame):
+                        if BaseDriver.isPresent(self.getCloseAddBtn1WE()):
+                            BaseDriver.clickOnWe(self.getCloseAddBtn1WE())
+                            BaseDriver.waitForSecond(2)
                             break
-                        if self.browserAction.switchToIframe(self.accountCreatedPage.getAdIframeWE()):
-                            self.browserAction.clickAndWait(self.accountCreatedPage.getCloseAddButtonWE())
+                        if BaseDriver.switchToIframe(self.getAdIframeWE()):
+                            BaseDriver.clickOnWe(self.getCloseAddButtonWE())
+                            BaseDriver.waitForSecond(2)
                         else:
-                            self.browserAction.switchBackFromIframe()
+                            BaseDriver.switchBackFromIframe()
             else:
                 print("No Add Iframe detected")

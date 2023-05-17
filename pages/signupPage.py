@@ -1,7 +1,4 @@
-import time
-
 from selenium.webdriver.common.by import By
-
 from base.base_driver import BaseDriver
 
 
@@ -103,7 +100,8 @@ class SignupPage(BaseDriver):
         BaseDriver.inputText(self.getZipcodeWE(), ziptx)
         BaseDriver.inputText(self.getPhoneWE(), phone)
         BaseDriver.scrollToElement(self.getBtnCreateAccountWE())
-        time.sleep(2)
-        BaseDriver.clickAndWait(self.getBtnCreateAccountWE())
+        BaseDriver.waitForSecond(2)
+        BaseDriver.clickOnWe(self.getBtnCreateAccountWE())
+        BaseDriver.waitForSecond(2)
 
         pass

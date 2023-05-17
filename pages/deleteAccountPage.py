@@ -1,10 +1,13 @@
 from selenium.webdriver.common.by import By
 
+from base.base_driver import BaseDriver
 
-class DeleteAccountPage:
+
+class DeleteAccountPage(BaseDriver):
 
     def __init__(self, driver):
         self.driver = driver
+        super().__init__(driver)
         self.url = "https://automationexercise.com/delete_account"
         self.titleXPath = "//section[@id='form']//h2"
         self.pageTitle = "ACCOUNT DELETED!"
@@ -24,3 +27,8 @@ class DeleteAccountPage:
     def getContinueButtonWE(self):
         return self.driver.find_element(By.XPATH, self.continueButtonXPath)
 
+    def getPageTitle(self):
+        return BaseDriver.getText(self.getPageTitleWE())
+
+    def clickOnContinueButton(self):
+        BaseDriver.clickOnWe(self.getContinueButtonWE())
