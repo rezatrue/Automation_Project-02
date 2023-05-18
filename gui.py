@@ -72,6 +72,12 @@ class Gui:
         buttonBackFromIframe = tk.Button(root, text="Back From Iframe", command=self.backFromIframe)
         buttonBackFromIframe.grid(row=6, column=3)
 
+        buttonTab = tk.Button(root, text="Press TAB", command=self.pressTab)
+        buttonTab.grid(row=7, column=1)
+
+        buttonActionClick = tk.Button(root, text="Action Click", command=self.actionClick)
+        buttonActionClick.grid(row=7, column=4)
+
         root.mainloop()
 
     def myClick(self):
@@ -221,9 +227,9 @@ class Gui:
 
     def scrollIntoElement(self):
         element = self.driver.find_element_by_xpath(self.inputXPath.get())
-        actions = ActionChains(self.driver)
-        actions.move_to_element(element).perform()
-        #self.driver.execute_script("arguments[0].scrollIntoView();", element)
+        # actions = ActionChains(self.driver)
+        # actions.move_to_element(element).perform()
+        self.driver.execute_script("arguments[0].scrollIntoView();", element)
 
     def getElementText(self):
         etext = self.driver.find_element_by_xpath(self.inputXPath.get()).text
@@ -242,3 +248,25 @@ class Gui:
     def backFromIframe(self):
         self.driver.switch_to.default_content()
 
+    def pressTab(self):
+        try:
+            actions = ActionChains(self.driver)
+            actions.send_keys(Keys.TAB)
+            actions.perform()
+            print("Successfully press Tab")
+        except:
+            print("Unable to press Tab")
+        pass
+
+    def actionClick(self):
+        element = self.driver.find_element_by_xpath(self.inputXPath.get())
+
+        try:
+            actions = ActionChains(self.driver)
+            actions.click(on_element=element)
+            actions.perform()
+            print("Successfully press action click")
+        except:
+            print("Unable to press action click")
+        pass
+        pass

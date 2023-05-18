@@ -1,7 +1,7 @@
 import time
 
 from pages.accountCreatedPage import AccountCreatedPage
-from base import Base
+from base_driver import BaseDriver
 from browserAction import BrowserAction
 from pages.deleteAccountPage import DeleteAccountPage
 from pages.homepage import HomePage
@@ -12,7 +12,7 @@ from pages.signupPage import SignupPage
 class RegisterUser:
 
     def __init__(self):
-        base = Base()
+        base = BaseDriver()
         driver = base.getDriver()
         self.homepage = HomePage(driver)
         self.loginPage = LoginPage(driver)

@@ -12,7 +12,7 @@ from selenium.webdriver.chrome.options import Options
 import psutil
 
 
-class Base:
+class BaseDriver:
 
     def __init__(self):
         pass
