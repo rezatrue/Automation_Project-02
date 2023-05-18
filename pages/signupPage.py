@@ -23,6 +23,7 @@ class SignupPage(BaseDriver):
         self.zipcodeXPath = "//input[@id='zipcode']"
         self.phoneXPath = "//input[@id='mobile_number']"
         self.btnCreateAccountXPath = "//button[text()='Create Account']"
+        self.footerAdContainerXPath = "//div[@class='grippy-host']"
         self.footerXPath = "//footer[@id='footer']"
         pass
 
@@ -89,6 +90,14 @@ class SignupPage(BaseDriver):
         return self.driver.find_element(self.footerXPath)
         pass
 
+    def getfooterAdContainerWE(self):
+        return self.driver.find_element(self.footerAdContainerXPath)
+        pass
+
+    def isFooterAdContainerExist(self):
+        return self.isPresent(self.footerAdContainerXPath)
+        pass
+
     def fillupAccountInformationForm(self, title, password, date, month, year, firstname, lastname, address, country, statetx, city, ziptx, phone):
         self.clickOnWe(self.getGenderInputWE(title))
         self.inputText(self.getPasswordWE(), password)
@@ -101,7 +110,8 @@ class SignupPage(BaseDriver):
         self.selectDropdownItem(self.getCountryWE(), country)
         self.inputText(self.getStateWE(), statetx)
         self.inputText(self.getCityWE(), city)
-        self.waitForSecond(5)
+        if self.isFooterAdContainerExist():
+            self.clickOnWe(self.getfooterAdContainerWE())
         self.inputText(self.getZipcodeWE(), ziptx)
         self.inputText(self.getPhoneWE(), phone)
         self.waitForSecond(2)

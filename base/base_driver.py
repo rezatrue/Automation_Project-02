@@ -71,9 +71,9 @@ class BaseDriver:
         self.driver.switch_to.default_content()
         pass
 
-    def isPresent(self, we):
+    def isPresent(self, xpath):
         try:
-            element = we
+            element = self.driver.find_element(By.XPATH, xpath)
             if element is not None:
                 print("Element present in the page")
         except NoSuchElementException:

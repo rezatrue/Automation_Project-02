@@ -259,14 +259,14 @@ class Gui:
         pass
 
     def actionClick(self):
-        element = self.driver.find_element_by_xpath(self.inputXPath.get())
-
+        element = self.driver.find_element(By.XPATH, self.inputXPath.get())
         try:
             actions = ActionChains(self.driver)
-            actions.click(on_element=element)
+            actions.move_to_element(element)
+            actions.click()
             actions.perform()
+            # self.driver.execute_script("arguments[0].click();", element)
             print("Successfully press action click")
         except:
             print("Unable to press action click")
-        pass
         pass
