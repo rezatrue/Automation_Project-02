@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from pages.accountCreatedPage import AccountCreatedPage
 
 
 class SignupPage(BaseDriver):
@@ -87,17 +88,23 @@ class SignupPage(BaseDriver):
         pass
 
     def getFooterWE(self):
-        return self.driver.find_element(self.footerXPath)
+        return self.driver.find_element(By.XPATH, self.footerXPath)
         pass
 
     def getfooterAdContainerWE(self):
-        return self.driver.find_element(self.footerAdContainerXPath)
+        return self.driver.find_element(By.XPATH, self.footerAdContainerXPath)
         pass
 
     def isFooterAdContainerExist(self):
         return self.isPresent(self.footerAdContainerXPath)
         pass
 
+    def isSignupFormPresent(self):
+        actualTitle = self.getSignUpFormTitleText()
+        expectedTitle = self.getSignupFormExpectedTitle()
+        if actualTitle.lower() == expectedTitle.lower():
+            return True
+        return False
     def fillupAccountInformationForm(self, title, password, date, month, year, firstname, lastname, address, country, statetx, city, ziptx, phone):
         self.clickOnWe(self.getGenderInputWE(title))
         self.inputText(self.getPasswordWE(), password)
@@ -116,5 +123,5 @@ class SignupPage(BaseDriver):
         self.inputText(self.getPhoneWE(), phone)
         self.waitForSecond(2)
         self.clickAndWait(self.getBtnCreateAccountWE())
-
+        return AccountCreatedPage(self.driver)
         pass

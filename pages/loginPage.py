@@ -1,5 +1,6 @@
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from pages.signupPage import SignupPage
 
 
 class LoginPage(BaseDriver):
@@ -29,9 +30,13 @@ class LoginPage(BaseDriver):
     def getSignupButtonWE(self):
         return self.driver.find_element(By.XPATH, self.__signupButtonXPath)
 
+    def isFormHeaderPresent(self):
+        return self.isPresent(self.__signUpFormXPath)
+
     def fillupSignupForm(self, name, email):
         self.inputText(self.getNameInputWE(), name)
         self.inputText(self.getEmailInputWE(), email)
         self.waitForSecond(2)
         self.clickAndWait(self.getSignupButtonWE())
+        return SignupPage(self.driver)
         pass

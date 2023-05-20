@@ -15,17 +15,6 @@ def setup(request):
     opts = webdriver.ChromeOptions()
     opts.add_argument("--start-maximized")
     driver = webdriver.Chrome(ChromeDriverManager().install(), options=opts)
-    homepage = HomePage(driver)
-    loginPage = LoginPage(driver)
-    signupPage = SignupPage(driver)
-    accountCreatedPage = AccountCreatedPage(driver)
-    deleteAccountPage = DeleteAccountPage(driver)
-    browserAction = BrowserAction(driver)
-    request.cls.homepage = homepage
-    request.cls.loginPage = loginPage
-    request.cls.signupPage = signupPage
-    request.cls.accountCreatedPage = accountCreatedPage
-    request.cls.deleteAccountPage = deleteAccountPage
-    request.cls.browserAction = browserAction
+    request.cls.driver = driver
     yield
     driver.close()

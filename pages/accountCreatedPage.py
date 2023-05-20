@@ -47,6 +47,12 @@ class AccountCreatedPage(BaseDriver):
     def getPageTitleText(self):
         return self.getText(self.getPageTitleWE())
 
+    def ifPageTitlePresent(self):
+        titleExpected = self.getPageTitle()
+        titleActual = self.getPageTitleText()
+        if (titleExpected.lower() == titleActual.lower()):
+            return True
+        return False
     def clickRegistrationContinueButton(self):
         self.clickOnWe(self.getContinueButtonWE())
         self.waitForSecond(2)
@@ -58,7 +64,7 @@ class AccountCreatedPage(BaseDriver):
             if len(iframes) > 0:
                 for frame in iframes:
                     if self.switchToIframe(frame):
-                        if self.isPresent(self.getCloseAddBtn1WE()):
+                        if self.isPresent(self.__closeAddBtn1XPath):
                             self.clickAndWait(self.getCloseAddBtn1WE())
                             break
                         if self.switchToIframe(self.getAdIframeWE()):

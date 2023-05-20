@@ -18,8 +18,6 @@ class DeleteAccountPage(BaseDriver):
     def getPageTitleWE(self):
         return self.driver.find_element(By.XPATH, self.__titleXPath)
 
-    def getPageTitle(self):
-        return self.__pageTitle
 
     def getContinueButtonWE(self):
         return self.driver.find_element(By.XPATH, self.__continueButtonXPath)
@@ -29,3 +27,11 @@ class DeleteAccountPage(BaseDriver):
 
     def clickOnContinueButton(self):
         self.clickAndWait(self.getContinueButtonWE())
+
+    def isPageTitlePresent(self):
+        actualText = self.getPageTitle()
+        expectedText = self.__pageTitle
+        if expectedText.lower() == actualText.lower():
+            return True
+        return False
+        pass

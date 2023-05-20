@@ -1,5 +1,7 @@
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from pages.deleteAccountPage import DeleteAccountPage
+from pages.loginPage import LoginPage
 
 
 class HomePage(BaseDriver):
@@ -27,16 +29,18 @@ class HomePage(BaseDriver):
         pass
 
     def clickOnSignupButton(self):
-        return self.clickAndWait(self.getSignUpButtonWE())
+        self.clickAndWait(self.getSignUpButtonWE())
+        return LoginPage(self.driver)
         pass
 
     def clickOnDeleteAccountButton(self):
-        return self.clickAndWait(self.getDeleteAccountButtonWE())
+        self.clickAndWait(self.getDeleteAccountButtonWE())
+        return DeleteAccountPage(self.driver)
         pass
 
     def isLogoutButtonPresent(self):
-        return self.isPresent(self.getLogoutButtonWE())
+        return self.isPresent(self.__logoutBtnXPath)
         pass
 
     def isSignUpButtonPresent(self):
-        return self.isPresent(self.getSignUpButtonWE())
+        return self.isPresent(self.__SignUpXPath)
