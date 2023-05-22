@@ -1,11 +1,13 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.deleteAccountPage import DeleteAccountPage
 from pages.loginPage import LoginPage
-
+from utilities.utils import Utils
 
 class HomePage(BaseDriver):
-
+    log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
         self.__url = "https://automationexercise.com/"
@@ -30,11 +32,13 @@ class HomePage(BaseDriver):
 
     def clickOnSignupButton(self):
         self.clickAndWait(self.getSignUpButtonWE())
+        self.log.info("Sing Up button clicked")
         return LoginPage(self.driver)
         pass
 
     def clickOnDeleteAccountButton(self):
         self.clickAndWait(self.getDeleteAccountButtonWE())
+        self.log.info("Delete Account button clicked")
         return DeleteAccountPage(self.driver)
         pass
 

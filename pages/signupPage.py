@@ -1,10 +1,13 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.accountCreatedPage import AccountCreatedPage
+from utilities.utils import Utils
 
 
 class SignupPage(BaseDriver):
-
+    log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
         self.url = "https://automationexercise.com/signup"
@@ -123,5 +126,6 @@ class SignupPage(BaseDriver):
         self.inputText(self.getPhoneWE(), phone)
         self.waitForSecond(2)
         self.clickAndWait(self.getBtnCreateAccountWE())
+        self.log.info("Second Sign Up form submitted")
         return AccountCreatedPage(self.driver)
         pass

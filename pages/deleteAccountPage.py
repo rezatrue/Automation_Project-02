@@ -1,9 +1,12 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from utilities.utils import Utils
 
 
 class DeleteAccountPage(BaseDriver):
-
+    log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
         self.__url = "https://automationexercise.com/delete_account"
@@ -27,6 +30,7 @@ class DeleteAccountPage(BaseDriver):
 
     def clickOnContinueButton(self):
         self.clickAndWait(self.getContinueButtonWE())
+        self.log.info("Continue delete Account button clicked")
 
     def isPageTitlePresent(self):
         actualText = self.getPageTitle()

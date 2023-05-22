@@ -1,9 +1,12 @@
+import logging
+
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from utilities.utils import Utils
 
 
 class AccountCreatedPage(BaseDriver):
-
+    log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
         self.__url = "https://automationexercise.com/account_created"
@@ -56,6 +59,7 @@ class AccountCreatedPage(BaseDriver):
     def clickRegistrationContinueButton(self):
         self.clickOnWe(self.getContinueButtonWE())
         self.waitForSecond(2)
+        self.log.info("Continue Sign Up button clicked")
 
         gAddUrl = self.__googeAddUrl
         if self.getCurrentUrl() == gAddUrl:

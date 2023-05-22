@@ -1,0 +1,38 @@
+{
+  "test1" : {
+    "name" : "Ronie",
+    "email" : "mail123981@yahoo.com",
+    "title" : "mr",
+    "password" : "password",
+    "date" : "1",
+    "month" : "January",
+    "year" : "2000",
+    "firstname" : "Ronie",
+    "lastname" : "Mia",
+    "address" : "House #1, Road #1",
+    "country" : "United States",
+    "state" : "New York",
+    "city" : "New York city",
+    "zip" : "11201",
+    "phone" : "+18801244589",
+    "expected" : true
+  },
+    "test2" : {
+    "name" : "Roky",
+    "email" : "mail123981@yahoo.com",
+    "title" : "mr",
+    "password" : "password",
+    "date" : "2",
+    "month" : "January",
+    "year" : "2000",
+    "firstname" : "Ronie",
+    "lastname" : "Mia",
+    "address" : "House #2, Road #2",
+    "country" : "United States",
+    "state" : "New York",
+    "city" : "New York city",
+    "zip" : "11201",
+    "phone" : "+18801244589",
+    "expected" : false
+  }
+}
