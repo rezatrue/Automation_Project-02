@@ -20,6 +20,7 @@ class TestUserRegistration:
         return test_data
 
     @pytest.mark.parametrize("test_data", read_csv_test_data().values())
+    # @pytest.mark.parametrize("test_data", Utils.read_xlsx_test_data("../testdata/testdata.xlsx", "Sheet1"))
     def test_register_and_delete_account(self, test_data):
         actual = False
         self.hp.openPageUrl()

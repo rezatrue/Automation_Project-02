@@ -1,7 +1,7 @@
 import logging
 import inspect
+from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
-
 
 class Utils:
 
@@ -20,21 +20,20 @@ class Utils:
         return logger
         pass
 
-    def read_xlsx_file(self, file_name, sheet_name):
-        total_data = []
+    def read_xlsx_test_data(self, file_name, sheet_name):
+        test_data = []
         try:
             workbook = load_workbook(filename=file_name)
             sheet = workbook[sheet_name]
 
-            max_row = sheet.max_row
-            max_column = sheet.max_column
+            headers = [sheet[get_column_letter(col)].value for col in range(1, sheet.max_column + 1)]
 
-            for row_num in range(2, max_row + 1):
-                row_data = []
-                for col_num in range(1, max_column + 1):
-                    cell_value = sheet.cell(row=row_num, column=col_num).value
-                    row_data.append(cell_value)
-                total_data.append(row_data)
+            for row in range(2, sheet.max_row + 1):
+                data = {}
+                for col, header in enumerate(headers, start=1):
+                    data[header] = sheet[get_column_letter(col) + str(row)].value
+                test_data.append(data)
         except:
             print("Error loading xlsx data")
-        return total_data
+
+        return test_data
