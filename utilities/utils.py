@@ -2,6 +2,7 @@ import logging
 import inspect
 from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
+import json
 
 class Utils:
 
@@ -26,14 +27,22 @@ class Utils:
             workbook = load_workbook(filename=file_name)
             sheet = workbook[sheet_name]
 
-            headers = [sheet[get_column_letter(col)].value for col in range(1, sheet.max_column + 1)]
+            headers = [sheet[get_column_letter(col)][0].value for col in range(1, sheet.max_column + 1)]
 
             for row in range(2, sheet.max_row + 1):
                 data = {}
                 for col, header in enumerate(headers, start=1):
                     data[header] = sheet[get_column_letter(col) + str(row)].value
+                    print(data[header])
                 test_data.append(data)
-        except:
+        except Exception as e:
+            print(e)
             print("Error loading xlsx data")
 
+        return test_data
+
+    def read_json_test_data(self):
+        test_data = []
+        with open("../testdata/testdata.json", "r") as file:
+            test_data = json.load(file)
         return test_data

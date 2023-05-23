@@ -3,7 +3,6 @@ import pytest
 from pages.homepage import HomePage
 from utilities.utils import Utils
 from ddt import ddt
-import json
 
 @ddt
 @pytest.mark.usefixtures("setup")
@@ -13,17 +12,11 @@ class TestUserRegistration:
         self.hp = HomePage(self.driver)
         self.utils = Utils()
 
-    @staticmethod
-    def read_csv_test_data():
-        with open("../testdata/testdata.json", "r") as file:
-            test_data = json.load(file)
-        return test_data
-
-    @pytest.mark.parametrize("test_data", read_csv_test_data().values())
-    # @pytest.mark.parametrize("test_data", Utils.read_xlsx_test_data("../testdata/testdata.xlsx", "Sheet1"))
+    # @pytest.mark.parametrize("test_data", Utils().read_json_test_data().values())
+    @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "signup"))
     def test_register_and_delete_account(self, test_data):
         actual = False
-        self.hp.openPageUrl()
+        # self.hp.openPageUrl()
         lp = self.hp.clickOnSignupButton()
         if lp.isFormHeaderPresent():
             sp = lp.fillupSignupForm(test_data['name'], test_data['email'])
