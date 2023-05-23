@@ -1,5 +1,7 @@
 import logging
 import inspect
+from openpyxl import load_workbook
+
 
 class Utils:
 
@@ -17,3 +19,22 @@ class Utils:
         logger.addHandler(fh)
         return logger
         pass
+
+    def read_xlsx_file(self, file_name, sheet_name):
+        total_data = []
+        try:
+            workbook = load_workbook(filename=file_name)
+            sheet = workbook[sheet_name]
+
+            max_row = sheet.max_row
+            max_column = sheet.max_column
+
+            for row_num in range(2, max_row + 1):
+                row_data = []
+                for col_num in range(1, max_column + 1):
+                    cell_value = sheet.cell(row=row_num, column=col_num).value
+                    row_data.append(cell_value)
+                total_data.append(row_data)
+        except:
+            print("Error loading xlsx data")
+        return total_data

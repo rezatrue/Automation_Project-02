@@ -1,9 +1,8 @@
-import time
 import pytest
 
 from pages.homepage import HomePage
 from utilities.utils import Utils
-from ddt import ddt, data, unpack, file_data
+from ddt import ddt
 import json
 
 @ddt
@@ -14,9 +13,13 @@ class TestUserRegistration:
         self.hp = HomePage(self.driver)
         self.utils = Utils()
 
-    # @file_data("../testdata/testdata.json")
-    @data(*json.load(open("../testdata/testdata.json")))
-    @unpack
+    @staticmethod
+    def read_csv_test_data():
+        with open("../testdata/testdata.json", "r") as file:
+            test_data = json.load(file)
+        return test_data
+
+    @pytest.mark.parametrize("test_data", read_csv_test_data().values())
     def test_register_and_delete_account(self, test_data):
         actual = False
         self.hp.openPageUrl()
