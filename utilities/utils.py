@@ -3,6 +3,7 @@ import inspect
 from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import json
+import csv
 
 class Utils:
 
@@ -41,8 +42,22 @@ class Utils:
 
         return test_data
 
-    def read_json_test_data(self):
+    def read_json_test_data(self, path):
         test_data = []
-        with open("../testdata/testdata.json", "r") as file:
+        with open(path, "r") as file:
             test_data = json.load(file)
+        return test_data
+
+    def read_csv_test_data(self, path):
+        test_data = []
+        with open(path, 'r') as file:
+            # csvreader = csv.reader(file, delimiter=',')
+            csvreader = csv.reader(file)
+            hearder = next(csvreader)  # gets the first line / row 1
+            for row in csvreader:
+                data = {}
+                for i in range(0, len(hearder)):
+                    data[hearder[i]] = row[i]
+                    print(data[hearder[i]])
+                test_data.append(data)
         return test_data

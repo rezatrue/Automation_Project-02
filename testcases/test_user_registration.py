@@ -12,8 +12,9 @@ class TestUserRegistration:
         self.hp = HomePage(self.driver)
         self.utils = Utils()
 
-    # @pytest.mark.parametrize("test_data", Utils().read_json_test_data().values())
-    @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "signup"))
+    @pytest.mark.parametrize("test_data", Utils().read_csv_test_data("../testdata/testdata.csv"))
+    # @pytest.mark.parametrize("test_data", Utils().read_json_test_data("../testdata/testdata.json").values())
+    # @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "signup"))
     def test_register_and_delete_account(self, test_data):
         actual = False
         # self.hp.openPageUrl()
