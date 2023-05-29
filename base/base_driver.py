@@ -51,9 +51,10 @@ class BaseDriver:
         ddelement.select_by_visible_text(opt)
 
     def scrollToElement(self, we):
-        # actions = ActionChains(self.driver)
-        # actions.move_to_element(we).perform()
-        self.driver.execute_script("arguments[0].scrollIntoView();", we)
+        # first move to the element
+        self.driver.execute_script("return arguments[0].scrollIntoView(true);", we)
+        # then scroll by x, y values, in this case 10 pixels up
+        self.driver.execute_script("window.scrollBy(0, -50);")
 
     def switchToIframe(self, iframeXpath):
         # driver.switch_to.frame("ID")
@@ -83,4 +84,9 @@ class BaseDriver:
 
     def getCurrentUrl(self):
         return self.driver.current_url
+        pass
+
+    def hoverOn(self, we):
+        actions = ActionChains(self.driver)
+        actions.move_to_element(we).perform()
         pass

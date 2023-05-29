@@ -4,6 +4,7 @@ from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
 from pages.deleteAccountPage import DeleteAccountPage
 from pages.loginPage import LoginPage
+from pages.productspage import ProductsPage
 from utilities.utils import Utils
 
 class HomePage(BaseDriver):
@@ -15,6 +16,8 @@ class HomePage(BaseDriver):
         self.__deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"
         self.__logoutBtnXPath = "//a[contains(text(),'Logout')]"
         self.__htmlBodyTag = "body"
+
+        self._productBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Products')]"
         pass
 
     def getSignUpButtonWE(self):
@@ -48,3 +51,12 @@ class HomePage(BaseDriver):
 
     def isSignUpButtonPresent(self):
         return self.isPresent(self.__SignUpXPath)
+
+    def getProductBtnButtonWE(self):
+        return self.driver.find_element(By.XPATH, self._productBtnXPath)
+
+    def clickOnProductBtn(self):
+        self.clickAndWait(self.getProductBtnButtonWE())
+        self.log.info("Product button clicked")
+        self.waitForSecond(7)
+        return ProductsPage(self.driver)
