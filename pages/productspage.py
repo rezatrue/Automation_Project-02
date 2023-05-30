@@ -22,20 +22,30 @@ class ProductsPage(BaseDriver):
 
     def getContinueShoppingWE(self):
         return self.driver.find_elements(By.XPATH, self._continueShoppingXPath)
+    def getCartBtnWE(self):
+        return self.driver.find_elements(By.XPATH, self._cartBtnXPath)
 
     def hoverOverOnNthImage(self, num):
         if num <= len(self.getProdutcsImageWrppersWE()):
             self.scrollToElement(self.getProdutcsImageWrppersWE()[num])
             self.hoverOn(self.getProdutcsImageWrppersWE()[num])
-            self.waitForSecond(2)
+            self.waitForSecond(4)
         pass
 
     def clickOnAddToCart(self):
-        self.clickOnWe(self.getAddToCartWE())
-        self.waitForSecond(3)
+        self.waitForSecond(2)
+        self.actionClickOn(self.getAddToCartWE())
+        self.waitForSecond(10)
         pass
 
     def clickOnContinueShopping(self):
+        self.switchToPopup()
         self.clickOnWe(self.getContinueShoppingWE())
-        self.waitForSecond(1)
+        self.switchBackToMain()
+        self.waitForSecond(2)
         pass
+
+    def clickOnCart(self):
+        self.scrollToElement(self.getCartBtnWE())
+        self.clickOnWe(self.getCartBtnWE())
+        self.waitForSecond(10)

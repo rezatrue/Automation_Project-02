@@ -56,7 +56,7 @@ class HomePage(BaseDriver):
         return self.driver.find_element(By.XPATH, self._productBtnXPath)
 
     def clickOnProductBtn(self):
-        self.clickAndWait(self.getProductBtnButtonWE())
+        self.clickOnWe(self.getProductBtnButtonWE())
         self.log.info("Product button clicked")
-        self.waitForSecond(7)
+        self.waitForSecond(5)
         return ProductsPage(self.driver)

@@ -15,10 +15,10 @@ class TestProducts:
 
     def test_add_products(self):
         pp = self.hp.clickOnProductBtn()
-        self.hoverOn(pp.hoverOverOnNthImage(1))
-        pp.clickOnAddToCard()
+        pp.hoverOverOnNthImage(1)
+        pp.clickOnAddToCart()
         pp.clickOnContinueShopping()
-        self.hoverOn(pp.hoverOverOnNthImage(2))
+        pp.hoverOverOnNthImage(2)
         pp.clickOnAddToCard()
         pp.clickOnContinueShopping()
         pp.clickOnCart()

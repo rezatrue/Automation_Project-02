@@ -53,8 +53,10 @@ class BaseDriver:
     def scrollToElement(self, we):
         # first move to the element
         self.driver.execute_script("return arguments[0].scrollIntoView(true);", we)
-        # then scroll by x, y values, in this case 10 pixels up
-        self.driver.execute_script("window.scrollBy(0, -50);")
+
+    def scrollToPixels(self, pixels):
+        self.driver.execute_script("window.scrollBy(0, %s);" % pixels)
+        # self.driver.execute_script(f"window.scrollBy(0, {pixels});")
 
     def switchToIframe(self, iframeXpath):
         # driver.switch_to.frame("ID")
@@ -71,6 +73,17 @@ class BaseDriver:
     def switchBackFromIframe(self):
         self.driver.switch_to.default_content()
         pass
+
+    def switchToPopup(self):
+        self.main_window = self.driver.current_window_handle
+        # after opening popup, change window handle
+        for handle in self.driver.window_handles:
+            if handle != self.main_window:
+                popup = handle
+                self.driver.switch_to.window(popup)
+
+    def switchBackToMain(self):
+        self.driver.switch_to.window(self.main_window)
 
     def isPresent(self, xpath):
         try:
@@ -89,4 +102,17 @@ class BaseDriver:
     def hoverOn(self, we):
         actions = ActionChains(self.driver)
         actions.move_to_element(we).perform()
+        pass
+
+    def actionClickOn(self, we):
+        try:
+            actions = ActionChains(self.driver)
+            actions.move_to_element(we)
+            actions.click()
+            actions.perform()
+            # self.driver.execute_script("return arguments[0].click();", we)
+            print("Successfully press action click")
+        except:
+            print("Unable to press action click")
+        pass
         pass

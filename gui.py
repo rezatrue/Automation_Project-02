@@ -78,6 +78,12 @@ class Gui:
         buttonActionClick = tk.Button(root, text="Action Click", command=self.actionClick)
         buttonActionClick.grid(row=7, column=4)
 
+        buttonSwitchToPopup = tk.Button(root, text="SwitchToPopup", command=self.switchToPopup)
+        buttonSwitchToPopup.grid(row=8, column=0)
+
+        buttonSwitchBakToMain = tk.Button(root, text="SwitchBakToMain", command=self.switchBakToMain)
+        buttonSwitchBakToMain.grid(row=8, column=2)
+
         root.mainloop()
 
     def myClick(self):
@@ -269,4 +275,17 @@ class Gui:
             print("Successfully press action click")
         except:
             print("Unable to press action click")
+        pass
+
+    def switchToPopup(self):
+        self.main_window = self.driver.current_window_handle
+        # after opening popup, change window handle
+        for handle in self.driver.window_handles:
+            if handle != self.main_window:
+                popup = handle
+                self.driver.switch_to.window(popup)
+
+
+    def switchBakToMain(self):
+        self.driver.switch_to.window(self.main_window)
         pass
