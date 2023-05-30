@@ -7,6 +7,7 @@ from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
 import time
 
+
 class BaseDriver:
 
     def __init__(self, driver):
@@ -31,6 +32,8 @@ class BaseDriver:
     def clickAndWait(self, sbwe):
         sbwe.click()
         self.waitForSecond(3)
+        if self.isBottomAddVisible():
+            self.closeBottomAdd()
         pass
 
     def inputText(self, we, text):
@@ -115,4 +118,17 @@ class BaseDriver:
         except:
             print("Unable to press action click")
         pass
+
+    def isBottomAddVisible(self):
+        time.sleep(5)
+        wait = WebDriverWait(self.driver, 10)
+        try:
+            wait.until(expected_conditions.presence_of_element_located((By.XPATH, "//div[@class='grippy-host']")))
+            return True
+        except TimeoutException:
+            return False
+
+    def closeBottomAdd(self):
+        self.waitForSecond(2)
+        self.clickOnWe(self.driver.find_element(By.XPATH, "//div[@class='grippy-host']"))
         pass

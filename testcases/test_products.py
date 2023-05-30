@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from pages.homepage import HomePage
@@ -15,11 +17,15 @@ class TestProducts:
 
     def test_add_products(self):
         pp = self.hp.clickOnProductBtn()
-        pp.hoverOverOnNthImage(1)
-        pp.clickOnAddToCart()
-        pp.clickOnContinueShopping()
+        time.sleep(10)
         pp.hoverOverOnNthImage(2)
-        pp.clickOnAddToCard()
+        time.sleep(10)
+        pp.clickOnAddToCart()
+        time.sleep(10)
         pp.clickOnContinueShopping()
+        time.sleep(10)
+        # pp.hoverOverOnNthImage(3)
+        # pp.clickOnAddToCard()
+        # pp.clickOnContinueShopping()
         pp.clickOnCart()
         pass

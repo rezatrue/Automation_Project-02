@@ -6,6 +6,7 @@ from openpyxl import load_workbook
 import json
 import csv
 
+
 class Utils:
 
     def assretTextCompare(self, expected, actual):
@@ -62,4 +63,5 @@ class Utils:
                     print(data[hearder[i]])
                 test_data.append(data)
         return test_data
+
 
