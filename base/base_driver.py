@@ -135,29 +135,49 @@ class BaseDriver:
 
     def isAddUrlPresent(self):
         self.waitForSecond(3)
-        addUrl = "https://automationexercise.com/#google_vignette"
+        addUrl = "#google_vignette"
         currenturl = self.getCurrentUrl()
-        if currenturl == addUrl:
+        if addUrl in currenturl:
             return True
         return False
+
+    def isPresentWithScc(self, sccLoc):
+        try:
+            element = self.driver.find_element(By.CSS_SELECTOR, sccLoc)
+            if element is not None:
+                print("Element present in the page")
+        except NoSuchElementException:
+            print("Not in the current DOM")
+            return False
+        return True
 
     def closeUrlAdd(self):
         # tips:  can be navigate to url without "#google_vignette"
         visibelAddIframeXPath = "//iframe[contains(@id,'aswift_') and contains(@style,'visibility: visible')]"
         indentedIframeXPath = "//iframe[@id='ad_iframe']"
         addCloseButtonXPath = "//div[@id='dismiss-button']/div/span"
+        addCloseIconCss = "#dismiss-button > div > svg > path:nth-child(1)"
 
         if self.isPresent(visibelAddIframeXPath):
             self.switchToIframe(visibelAddIframeXPath)
-            if self.isPresent(indentedIframeXPath):
+            if self.isPresentWithScc(addCloseIconCss):
+                self.clickOnWe(self.driver.find_element(By.CSS_SELECTOR, addCloseIconCss))
+            elif self.isPresent(indentedIframeXPath):
                 self.switchToIframe(indentedIframeXPath)
-                self.clickOnWe(self.driver.find_element(By.XPATH,addCloseButtonXPath))
-                self.switchBackFromIframe()
+                self.clickOnWe(self.driver.find_element(By.XPATH, addCloseButtonXPath))
+            else:
+                if self.isAddUrlPresent():
+                    self.driver.get(self.getCurrentUrl().replace("#google_vignette", ""))
+            self.switchBackFromIframe()
         pass
+
     def addHandeler(self):
         self.waitForSecond(2)
+        print("addHandeler 1")
         if self.isAddUrlPresent():
+            print("addHandeler 2")
             self.closeUrlAdd()
         if self.isBottomAddVisible():
+            print("addHandeler 3")
             self.closeBottomAdd()
         pass
