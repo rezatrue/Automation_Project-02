@@ -132,3 +132,32 @@ class BaseDriver:
         self.waitForSecond(2)
         self.clickOnWe(self.driver.find_element(By.XPATH, "//div[@class='grippy-host']"))
         pass
+
+    def isAddUrlPresent(self):
+        self.waitForSecond(3)
+        addUrl = "https://automationexercise.com/#google_vignette"
+        currenturl = self.getCurrentUrl()
+        if currenturl == addUrl:
+            return True
+        return False
+
+    def closeUrlAdd(self):
+        # tips:  can be navigate to url without "#google_vignette"
+        visibelAddIframeXPath = "//iframe[contains(@id,'aswift_') and contains(@style,'visibility: visible')]"
+        indentedIframeXPath = "//iframe[@id='ad_iframe']"
+        addCloseButtonXPath = "//div[@id='dismiss-button']/div/span"
+
+        if self.isPresent(visibelAddIframeXPath):
+            self.switchToIframe(visibelAddIframeXPath)
+            if self.isPresent(indentedIframeXPath):
+                self.switchToIframe(indentedIframeXPath)
+                self.clickOnWe(self.driver.find_element(By.XPATH,addCloseButtonXPath))
+                self.switchBackFromIframe()
+        pass
+    def addHandeler(self):
+        self.waitForSecond(2)
+        if self.isAddUrlPresent():
+            self.closeUrlAdd()
+        if self.isBottomAddVisible():
+            self.closeBottomAdd()
+        pass

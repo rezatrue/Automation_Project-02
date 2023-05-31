@@ -58,5 +58,5 @@ class HomePage(BaseDriver):
     def clickOnProductBtn(self):
         self.clickAndWait(self.getProductBtnButtonWE())
         self.log.info("Clicked on products from the manu")
-        self.waitForSecond(1)
+        self.addHandeler()
         return ProductsPage(self.driver)
