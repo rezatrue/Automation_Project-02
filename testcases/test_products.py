@@ -2,6 +2,7 @@ import time
 
 import pytest
 
+from pages.cartpage import CartPage
 from pages.homepage import HomePage
 from utilities.utils import Utils
 
@@ -26,9 +27,15 @@ class TestProducts:
         time.sleep(1)
         pp.hoverOverOnNthImage(1)
         time.sleep(1)
-        pp.clickOnAddToCard()
+        pp.clickOnAddToCart()
         time.sleep(1)
         pp.clickOnContinueShopping()
         time.sleep(1)
-        pp.clickOnCart()
+        cp = pp.clickOnCart()
+        cp.getItemCounts()
+        pass
+
+    def test_remove_products(self):
+        cp = CartPage(self.driver)
+        cp.removeAllItemsfromCart()
         pass

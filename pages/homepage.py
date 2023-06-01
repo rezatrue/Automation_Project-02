@@ -11,6 +11,7 @@ class HomePage(BaseDriver):
     log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
+        self.addHandeler()
         self.__url = "https://automationexercise.com/"
         self.__SignUpXPath = "//a[contains(text(),'Signup / Login')]"
         self.__deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"

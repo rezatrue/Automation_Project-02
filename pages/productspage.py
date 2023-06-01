@@ -1,12 +1,13 @@
 from selenium.webdriver.common.by import By
 
 from base.base_driver import BaseDriver
-
+from pages.cartpage import CartPage
 
 class ProductsPage(BaseDriver):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.addHandeler()
         self._url = "https://automationexercise.com/products"
         self._productImageWrappersXPath = "//div[@class='product-image-wrapper']"
         self._viewProductXPath = "//div[@class='product-image-wrapper']//a[contains(text(),'View Product')]"
@@ -57,4 +58,5 @@ class ProductsPage(BaseDriver):
     def clickOnCart(self):
         self.scrollToElement(self.getCartBtnWE())
         self.clickOnWe(self.getCartBtnWE())
-        self.waitForSecond(10)
+        self.addHandeler()
+        return CartPage(self.driver)
