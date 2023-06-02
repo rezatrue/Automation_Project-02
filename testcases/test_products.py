@@ -18,21 +18,18 @@ class TestProducts:
 
     def test_add_products(self):
         pp = self.hp.clickOnProductBtn()
-        time.sleep(1)
-        pp.hoverOverOnNthImage(0)
-        time.sleep(1)
-        pp.clickOnAddToCart()
+        we = pp.hoverOverOnNthImage(0)
+        pp.clickOnAddToCart(we)
         time.sleep(1)
         pp.clickOnContinueShopping()
-        time.sleep(1)
-        pp.hoverOverOnNthImage(1)
-        time.sleep(1)
-        pp.clickOnAddToCart()
+        time.sleep(2)
+        we = pp.hoverOverOnNthImage(1, -40)
+        pp.clickOnAddToCart(we)
         time.sleep(1)
         pp.clickOnContinueShopping()
-        time.sleep(1)
+        time.sleep(2)
         cp = pp.clickOnCart()
-        cp.getItemCounts()
+        assert cp.getItemCounts() == 2
         pass
 
     def test_remove_products(self):

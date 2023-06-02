@@ -1,4 +1,5 @@
 import logging
+import time
 
 from selenium.webdriver.common.by import By
 
@@ -27,6 +28,7 @@ class CartPage(BaseDriver):
         return self.driver.find_element(By.XPATH, xpath)
 
     def removeAllItemsfromCart(self):
-        for i in len(self.getItems()):
-            print(self._itemsXpath + "["+(i+1)+"]" + self._removeItemXpath)
-            self.clickOnWe(self.getItem(self._itemsXpath + "["+(i+1)+"]" + self._removeItemXpath))
+        for i in range(0, len(self.getItems())):
+            print(self._itemsXpath + "["+str(i+1)+"]" + self._removeItemXpath)
+            self.clickOnWe(self.getItem(self._itemsXpath + "[1]" + self._removeItemXpath))
+            time.sleep(10)
