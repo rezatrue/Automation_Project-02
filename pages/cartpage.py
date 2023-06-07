@@ -13,6 +13,7 @@ class CartPage(BaseDriver):
 
     def __init__(self, driver):
         super().__init__(driver)
+        self.addHandeler()
         self._itemsXpath = "//tr[contains(@id,'product-')]"
         self._removeItemXpath = "//a[@class='cart_quantity_delete']"
         pass

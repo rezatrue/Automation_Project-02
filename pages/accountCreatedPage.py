@@ -9,6 +9,7 @@ class AccountCreatedPage(BaseDriver):
     log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
+        self.addHandeler()
         self.__url = "https://automationexercise.com/account_created"
         self.__titleXPath = "//section[@id='form']//h2"
         self.__pageTitle = "Account Created!"

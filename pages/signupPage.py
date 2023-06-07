@@ -10,6 +10,7 @@ class SignupPage(BaseDriver):
     log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
         super().__init__(driver)
+        self.addHandeler()
         self.url = "https://automationexercise.com/signup"
         self.signupFormTitleXPath = "//div[@class='login-form']/h2"
         self.signupFormExpectedTitle = "Enter Account Information"
