@@ -2,6 +2,7 @@ import logging
 
 from selenium.webdriver.common.by import By
 from base.base_driver import BaseDriver
+from pages.cartpage import CartPage
 from pages.deleteAccountPage import DeleteAccountPage
 from pages.loginPage import LoginPage
 from pages.productspage import ProductsPage
@@ -17,7 +18,7 @@ class HomePage(BaseDriver):
         self.__deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"
         self.__logoutBtnXPath = "//a[contains(text(),'Logout')]"
         self.__htmlBodyTag = "body"
-
+        self._cartBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Cart')]"
         self._productBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Products')]"
         pass
 
@@ -60,3 +61,11 @@ class HomePage(BaseDriver):
         self.clickAndWait(self.getProductBtnButtonWE())
         self.log.info("Clicked on products from the manu")
         return ProductsPage(self.driver)
+
+    def getCartButtonWE(self):
+        return self.driver.find_element(By.XPATH, self._cartBtnXPath)
+
+    def clickOnCartBtn(self):
+        self.clickAndWait(self.getCartButtonWE())
+        self.log.info("Clicked on Cart from the manu")
+        return CartPage(self.driver)

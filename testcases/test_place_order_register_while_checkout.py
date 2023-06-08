@@ -1,6 +1,7 @@
 import time
 
 import pytest
+from ddt import data, unpack
 
 from pages.homepage import HomePage
 from utilities.utils import Utils
@@ -53,8 +54,16 @@ class TestPlaceOrderRegisterWhileCheckout:
         pass
 
     @pytest.mark.dependency(depends=["test_place_order","test_register_login"], scope='class')
-    def test_check_out(self):
+    @data('Visa', '411111111111111111', '311', '02', '2027')
+    @unpack
+    def test_check_out(self, card_name, card_number, cvc, ex_month, ex_year):
         print("test_check_out")
+        cp = self.hp.clickOnCartBtn()
+        cop = cp.clickOnProceedCheckoutBtn()
+        payp = cop.clickOnPlacrOrderBtn()
+        pdp = payp.submitPaymentInf(card_name, card_number, cvc, ex_month, ex_year)
+        assert pdp.isPaymentDonePage()
+        pdp.clickOnContinueBtn()
         pass
 
     @pytest.mark.dependency(depends=["test_register_login"], scope='class')
