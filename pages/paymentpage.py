@@ -4,7 +4,6 @@ import time
 from selenium.webdriver.common.by import By
 
 from base.base_driver import BaseDriver
-from pages.checkoutpage import CheckoutPage
 from pages.paymentdonepage import PaymentDonePage
 from utilities.utils import Utils
 

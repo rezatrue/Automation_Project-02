@@ -1,10 +1,8 @@
 import logging
-import time
 
 from selenium.webdriver.common.by import By
 
 from base.base_driver import BaseDriver
-from pages.paymentpage import PaymentPage
 from utilities.utils import Utils
 
 
