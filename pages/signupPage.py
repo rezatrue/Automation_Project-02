@@ -110,23 +110,30 @@ class SignupPage(BaseDriver):
             return True
         return False
     def fillupAccountInformationForm(self, title, password, date, month, year, firstname, lastname, address, country, statetx, city, ziptx, phone):
-        self.clickOnWe(self.getGenderInputWE(title))
-        self.inputText(self.getPasswordWE(), password)
-        self.selectDropdownItem(self.getDaysWE(), date)
-        self.selectDropdownItem(self.getMonthsWE(), month)
-        self.selectDropdownItem(self.getYearsWE(), year)
-        self.inputText(self.getFirstNameWE(), firstname)
-        self.inputText(self.getLastNameWE(), lastname)
-        self.inputText(self.getAddress1WE(), address)
-        self.selectDropdownItem(self.getCountryWE(), country)
-        self.inputText(self.getStateWE(), statetx)
-        self.inputText(self.getCityWE(), city)
-        if self.isFooterAdContainerExist():
-            self.clickOnWe(self.getfooterAdContainerWE())
-        self.inputText(self.getZipcodeWE(), ziptx)
-        self.inputText(self.getPhoneWE(), phone)
-        self.waitForSecond(2)
-        self.clickAndWait(self.getBtnCreateAccountWE())
-        self.log.info("Second Sign Up form submitted")
-        return AccountCreatedPage(self.driver)
+        try:
+            self.clickOnWe(self.getGenderInputWE(title))
+            self.scrollToElement(self.getPasswordWE())
+            self.waitForSecond(2)
+            self.inputText(self.getPasswordWE(), password)
+            self.selectDropdownItem(self.getDaysWE(), str(date))
+            self.selectDropdownItem(self.getMonthsWE(), str(month))
+            self.selectDropdownItem(self.getYearsWE(), str(year))
+            self.inputText(self.getFirstNameWE(), firstname)
+            self.inputText(self.getLastNameWE(), lastname)
+            self.inputText(self.getAddress1WE(), address)
+            self.selectDropdownItem(self.getCountryWE(), country)
+            self.inputText(self.getStateWE(), statetx)
+            self.inputText(self.getCityWE(), city)
+            # if self.isFooterAdContainerExist():
+            #     self.clickOnWe(self.getfooterAdContainerWE())
+            self.inputText(self.getZipcodeWE(), ziptx)
+            self.inputText(self.getPhoneWE(), phone)
+            self.waitForSecond(2)
+            self.clickAndWait(self.getBtnCreateAccountWE())
+            self.log.info("Second Sign Up form submitted")
+            return AccountCreatedPage(self.driver)
+        except Exception as error:
+            print(error)
+            return None
+
         pass

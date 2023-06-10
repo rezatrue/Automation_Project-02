@@ -13,7 +13,7 @@ class PaymentDonePage(BaseDriver):
     def __init__(self, driver):
         super().__init__(driver)
         self.addHandeler()
-        self.url = "https://automationexercise.com/payment_done/400"
+        self._url = "https://automationexercise.com/payment_done/"
         self._continueBtnXPath = "//*[@id='form']//a[contains(text(),'Continue')]"
         pass
 
@@ -21,7 +21,7 @@ class PaymentDonePage(BaseDriver):
         return self.driver.find_element(By.XPATH, self._continueBtnXPath)
 
     def isPaymentDonePage(self):
-        if self.getCurrentUrl() == self.url:
+        if self.getCurrentUrl() in self._url:
             return True
         else:
             return False

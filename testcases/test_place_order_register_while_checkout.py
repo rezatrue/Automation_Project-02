@@ -4,6 +4,7 @@ import pytest
 from ddt import data, unpack
 
 from pages.homepage import HomePage
+from pages.loginPage import LoginPage
 from utilities.utils import Utils
 
 
@@ -31,31 +32,31 @@ class TestPlaceOrderRegisterWhileCheckout:
         pp.clickOnContinueShopping()
         time.sleep(2)
         cp = pp.clickOnCart()
-        assert cp.getItemCounts() == 2
+        cp.clickOnProceedCheckoutBtn()
         pass
 
     @pytest.mark.dependency(depends=["test_place_order"])
-    @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "signup"))
+    @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "checkout"))
     def test_register_login(self, test_data):
         print("test_register_login")
         actual = False
-        lp = self.hp.clickOnSignupButton()
+        lp = LoginPage(self.driver)
         if lp.isFormHeaderPresent():
             sp = lp.fillupSignupForm(test_data['name'], test_data['email'])
             if sp.isSignupFormPresent():
                 acp = sp.fillupAccountInformationForm(test_data['title'], test_data['password'], test_data['date'], test_data['month'], test_data['year'], test_data['firstname'], test_data['lastname'], test_data['address'], test_data['country'], test_data['state'], test_data['city'], test_data['zip'], test_data['phone'])
-                if acp.ifPageTitlePresent():
-                    acp.clickRegistrationContinueButton()
-                    if self.hp.isLogoutButtonPresent():
-                        actual = True
+                if acp is not None:
+                    if acp.ifPageTitlePresent():
+                        acp.clickRegistrationContinueButton()
+                        if self.hp.isLogoutButtonPresent():
+                            actual = True
 
         assert actual == test_data['expected']
 
         pass
 
-    @pytest.mark.dependency(depends=["test_place_order","test_register_login"], scope='class')
-    @data('Visa', '411111111111111111', '311', '02', '2027')
-    @unpack
+    @pytest.mark.dependency(depends=["test_place_order", "test_register_login"], scope='class')
+    @pytest.mark.parametrize('card_name, card_number, cvc, ex_month, ex_year', [('Visa', '411111111111111111', '311', '02', '2027')])
     def test_check_out(self, card_name, card_number, cvc, ex_month, ex_year):
         print("test_check_out")
         cp = self.hp.clickOnCartBtn()

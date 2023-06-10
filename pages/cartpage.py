@@ -5,6 +5,7 @@ from selenium.webdriver.common.by import By
 
 from base.base_driver import BaseDriver
 from pages.checkoutpage import CheckoutPage
+from pages.loginPage import LoginPage
 from utilities.utils import Utils
 
 
@@ -18,6 +19,8 @@ class CartPage(BaseDriver):
         self._itemsXpath = "//tr[contains(@id,'product-')]"
         self._removeItemXpath = "//a[@class='cart_quantity_delete']"
         self._proceedCheckoutBtnXPath = "//*[@id='do_action']//a[@class='btn btn-default check_out']"
+        # self._proceedCheckoutBtnXPath = "//*[@id='do_action']//a[contains(text(),'Proceed To Checkout')]"
+        self._loginBtnXPath = "//*[@id='checkoutModal']//a[child::u[contains(text(),'Login')]]"
         pass
 
     def getItems(self):
@@ -40,7 +43,17 @@ class CartPage(BaseDriver):
     def getProceedCheckoutBtnWE(self):
         return self.driver.find_element(By.XPATH, self._proceedCheckoutBtnXPath)
 
+    def getLoginBtnWE(self):
+        return self.driver.find_element(By.XPATH, self._loginBtnXPath)
+    def isLoginPopupPresent(self):
+        if self.isPresent(self._loginBtnXPath):
+            return True
+        return False
     def clickOnProceedCheckoutBtn(self):
         self.clickAndWait(self.getProceedCheckoutBtnWE())
         print("Click on proceed to checkout button")
-        return CheckoutPage(self.driver)
+        if self.isLoginPopupPresent():
+            self.clickAndWait(self.getLoginBtnWE())
+            return LoginPage(self.driver)
+        else:
+            return CheckoutPage(self.driver)

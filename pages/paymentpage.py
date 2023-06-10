@@ -53,5 +53,5 @@ class PaymentPage(BaseDriver):
         self.inputText(self.getCvcInputWE(), cvc)
         self.inputText(self.getExpiryMonthInputWE(), ex_month)
         self.inputText(self.getExpiryYearInputWE(), ex_year)
-        self.clickOnConfirmOrderBtn()
+        return self.clickOnConfirmOrderBtn()
         pass

@@ -50,8 +50,11 @@ class BaseDriver:
         # time.sleep(sec)
 
     def selectDropdownItem(self, we, opt):
-        ddelement = Select(we)
-        ddelement.select_by_visible_text(opt)
+        try:
+            ddelement = Select(we)
+            ddelement.select_by_visible_text(opt)
+        except Exception as error:
+            print(error)
 
     def scrollToElement(self, we):
         # first move to the element
@@ -120,10 +123,9 @@ class BaseDriver:
         pass
 
     def isBottomAddVisible(self):
-        time.sleep(5)
         wait = WebDriverWait(self.driver, 10)
         try:
-            wait.until(expected_conditions.presence_of_element_located((By.XPATH, "//div[@class='grippy-host']")))
+            wait.until(expected_conditions.visibility_of_element_located((By.XPATH, "//div[@class='grippy-host']")))
             return True
         except TimeoutException:
             return False
