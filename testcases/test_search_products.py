@@ -5,7 +5,7 @@ from utilities.utils import Utils
 
 
 @pytest.mark.usefixtures("setup")
-class TestSearchProducts():
+class TestSearchProducts:
 
     @pytest.fixture(autouse=True)
     def setUp(self):
