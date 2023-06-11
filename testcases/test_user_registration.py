@@ -12,7 +12,7 @@ class TestUserRegistration:
         self.hp = HomePage(self.driver)
         self.utils = Utils()
 
-    @pytest.mark.parametrize("test_data", Utils().read_csv_test_data("./testdata/testdata.csv"))
+    @pytest.mark.parametrize("test_data", Utils().read_csv_test_data("../testdata/testdata.csv"))
     # @pytest.mark.parametrize("test_data", Utils().read_json_test_data("../testdata/testdata.json").values())
     # @pytest.mark.parametrize("test_data", Utils().read_xlsx_test_data("../testdata/testdata.xlsx", "signup"))
     def test_register_and_delete_account(self, test_data):
@@ -32,5 +32,9 @@ class TestUserRegistration:
                             if self.hp.isSignUpButtonPresent():
                                 actual = True
 
-        assert actual == test_data['expected']
+        if test_data['expected'] == "TRUE":
+            expected = True
+        elif test_data['expected'] == "FALSE":
+            expected = False
+        assert actual == expected
         pass

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common.exceptions import TimeoutException
+from selenium.common.exceptions import TimeoutException, StaleElementReferenceException
 from selenium.webdriver.support.ui import Select
 from selenium.common.exceptions import NoSuchElementException
 from selenium.webdriver.common.action_chains import ActionChains
@@ -31,10 +31,24 @@ class BaseDriver:
 
     def clickAndWait(self, sbwe):
         sbwe.click()
-        self.waitForSecond(3)
+        time.sleep(3)
         if self.isBottomAddVisible():
             self.closeBottomAdd()
         pass
+
+    def clickOnStaleElement(self, we, max_attempts=3):
+        attempt = 1
+        while attempt <= max_attempts:
+            try:
+                we.click()
+                time.sleep(3)
+                return  # Successfully completed action
+            except StaleElementReferenceException:
+                print(f"StaleElementReferenceException occurred. Retrying ({attempt}/{max_attempts})...")
+                attempt += 1
+                wait = WebDriverWait(self.driver, 10)
+                wait.until(expected_conditions.staleness_of(we))
+        print("Max attempts reached. Action failed.")
 
     def inputText(self, we, text):
         we.send_keys(text)
@@ -173,13 +187,24 @@ class BaseDriver:
             self.switchBackFromIframe()
         pass
 
+    def waitForItemLoad(self, xpath, sec):
+        wait = WebDriverWait(self.driver, sec)
+        try:
+            wait.until(expected_conditions.visibility_of_element_located((By.XPATH, xpath)))
+            return True
+        except TimeoutException:
+            return False
+        pass
+
     def addHandeler(self):
-        self.waitForSecond(2)
-        print("addHandeler 1")
+        print("google_add: checking")
         if self.isAddUrlPresent():
-            print("addHandeler 2")
+            print("google_add: in the url")
             self.closeUrlAdd()
+            self.waitForSecond(3)
         if self.isBottomAddVisible():
-            print("addHandeler 3")
+            print("google_add: at the bottom")
             self.closeBottomAdd()
+            self.waitForSecond(3)
+        print("goolge add resolved")
         pass

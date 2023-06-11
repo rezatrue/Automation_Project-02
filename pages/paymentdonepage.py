@@ -21,7 +21,7 @@ class PaymentDonePage(BaseDriver):
         return self.driver.find_element(By.XPATH, self._continueBtnXPath)
 
     def isPaymentDonePage(self):
-        if self.getCurrentUrl() in self._url:
+        if self._url in self.getCurrentUrl():
             return True
         else:
             return False

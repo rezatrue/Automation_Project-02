@@ -11,6 +11,7 @@ from utilities.utils import Utils
 class HomePage(BaseDriver):
     log = Utils.custom_logger(logLevel=logging.INFO)
     def __init__(self, driver):
+        print("--> Home  Page loading ...")
         super().__init__(driver)
         self.addHandeler()
         self.__url = "https://automationexercise.com/"
@@ -20,6 +21,7 @@ class HomePage(BaseDriver):
         self.__htmlBodyTag = "body"
         self._cartBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Cart')]"
         self._productBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Products')]"
+
         pass
 
     def getSignUpButtonWE(self):
@@ -59,6 +61,7 @@ class HomePage(BaseDriver):
 
     def clickOnProductBtn(self):
         self.clickAndWait(self.getProductBtnButtonWE())
+        print("Clicked on products from the manu")
         self.log.info("Clicked on products from the manu")
         return ProductsPage(self.driver)
 
