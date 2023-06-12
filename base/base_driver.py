@@ -169,6 +169,9 @@ class BaseDriver:
 
     def closeUrlAdd(self):
         # tips:  can be navigate to url without "#google_vignette"
+        self.driver.get(self.getCurrentUrl().replace("#google_vignette", ""))
+        # skiping click & close google add for faster execution
+        """
         visibelAddIframeXPath = "//iframe[contains(@id,'aswift_') and contains(@style,'visibility: visible')]"
         indentedIframeXPath = "//iframe[@id='ad_iframe']"
         addCloseButtonXPath = "//div[@id='dismiss-button']/div/span"
@@ -185,6 +188,7 @@ class BaseDriver:
                 if self.isAddUrlPresent():
                     self.driver.get(self.getCurrentUrl().replace("#google_vignette", ""))
             self.switchBackFromIframe()
+        """
         pass
 
     def waitForItemLoad(self, xpath, sec):

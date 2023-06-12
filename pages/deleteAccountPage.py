@@ -10,21 +10,21 @@ class DeleteAccountPage(BaseDriver):
     def __init__(self, driver):
         super().__init__(driver)
         self.addHandeler()
-        self.__url = "https://automationexercise.com/delete_account"
-        self.__titleXPath = "//section[@id='form']//h2"
-        self.__pageTitle = "ACCOUNT DELETED!"
-        self.__continueButtonXPath = "//a[text()='Continue']"
+        self._url = "https://automationexercise.com/delete_account"
+        self._titleXPath = "//section[@id='form']//h2"
+        self._pageTitle = "ACCOUNT DELETED!"
+        self._continueButtonXPath = "//a[text()='Continue']"
         pass
 
     def getPageUrl(self):
-        return self.__url
+        return self._url
 
     def getPageTitleWE(self):
-        return self.driver.find_element(By.XPATH, self.__titleXPath)
+        return self.driver.find_element(By.XPATH, self._titleXPath)
 
 
     def getContinueButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.__continueButtonXPath)
+        return self.driver.find_element(By.XPATH, self._continueButtonXPath)
 
     def getPageTitle(self):
         return self.getText(self.getPageTitleWE())
@@ -35,7 +35,7 @@ class DeleteAccountPage(BaseDriver):
 
     def isPageTitlePresent(self):
         actualText = self.getPageTitle()
-        expectedText = self.__pageTitle
+        expectedText = self._pageTitle
         if expectedText.lower() == actualText.lower():
             return True
         return False

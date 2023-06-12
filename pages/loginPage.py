@@ -10,31 +10,31 @@ class LoginPage(BaseDriver):
     def __init__(self, driver):
         super().__init__(driver)
         self.addHandeler()
-        self.__url = "https://automationexercise.com/login"
-        self.__signUpFormXPath = "//div[@class='signup-form']/h2[text()='New User Signup!']"
-        self.__nameInputXPath = "//div[@class='signup-form']//input[@name='name']"
-        self.__emailInputXPath = "//div[@class='signup-form']//input[@name='email']"
-        self.__signupButtonXPath = "//div[@class='signup-form']//button[text()='Signup']"
-        self.__htmlBodyTag = "body"
+        self._url = "https://automationexercise.com/login"
+        self._signUpFormXPath = "//div[@class='signup-form']/h2[text()='New User Signup!']"
+        self._nameInputXPath = "//div[@class='signup-form']//input[@name='name']"
+        self._emailInputXPath = "//div[@class='signup-form']//input[@name='email']"
+        self._signupButtonXPath = "//div[@class='signup-form']//button[text()='Signup']"
+        self._htmlBodyTag = "body"
         pass
 
     def getPageUrl(self):
-        return self.__url
+        return self._url
 
     def getSignUpFormWE(self):
-        return self.driver.find_element(By.XPATH, self.__signUpFormXPath)
+        return self.driver.find_element(By.XPATH, self._signUpFormXPath)
 
     def getNameInputWE(self):
-        return self.driver.find_element(By.XPATH, self.__nameInputXPath)
+        return self.driver.find_element(By.XPATH, self._nameInputXPath)
 
     def getEmailInputWE(self):
-        return self.driver.find_element(By.XPATH, self.__emailInputXPath)
+        return self.driver.find_element(By.XPATH, self._emailInputXPath)
 
     def getSignupButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.__signupButtonXPath)
+        return self.driver.find_element(By.XPATH, self._signupButtonXPath)
 
     def isFormHeaderPresent(self):
-        return self.isPresent(self.__signUpFormXPath)
+        return self.isPresent(self._signUpFormXPath)
 
     def fillupSignupForm(self, name, email):
         self.inputText(self.getNameInputWE(), name)

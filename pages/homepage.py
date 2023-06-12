@@ -14,27 +14,31 @@ class HomePage(BaseDriver):
         print("--> Home  Page loading ...")
         super().__init__(driver)
         self.addHandeler()
-        self.__url = "https://automationexercise.com/"
-        self.__SignUpXPath = "//a[contains(text(),'Signup / Login')]"
-        self.__deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"
-        self.__logoutBtnXPath = "//a[contains(text(),'Logout')]"
-        self.__htmlBodyTag = "body"
+        self._url = "https://automationexercise.com/"
+        self._SignUpXPath = "//a[contains(text(),'Signup / Login')]"
+        self._deleteAccountBtnXPath = "//a[contains(text(),'Delete Account')]"
+        self._logoutBtnXPath = "//a[contains(text(),'Logout')]"
+        self._htmlBodyTag = "body"
         self._cartBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Cart')]"
         self._productBtnXPath = "//ul[@class='nav navbar-nav']/li/a[contains(text(),'Products')]"
 
         pass
 
+    def getPageUrl(self):
+        return self._url
+
+
     def getSignUpButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.__SignUpXPath)
+        return self.driver.find_element(By.XPATH, self._SignUpXPath)
 
     def getLogoutButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.__logoutBtnXPath)
+        return self.driver.find_element(By.XPATH, self._logoutBtnXPath)
 
     def getDeleteAccountButtonWE(self):
-        return self.driver.find_element(By.XPATH, self.__deleteAccountBtnXPath)
+        return self.driver.find_element(By.XPATH, self._deleteAccountBtnXPath)
 
     def openPageUrl(self):
-        return self.openUrlAndCheck(self.__url, self.__htmlBodyTag)
+        return self.openUrlAndCheck(self._url, self._htmlBodyTag)
         pass
 
     def clickOnSignupButton(self):
@@ -50,11 +54,11 @@ class HomePage(BaseDriver):
         pass
 
     def isLogoutButtonPresent(self):
-        return self.isPresent(self.__logoutBtnXPath)
+        return self.isPresent(self._logoutBtnXPath)
         pass
 
     def isSignUpButtonPresent(self):
-        return self.isPresent(self.__SignUpXPath)
+        return self.isPresent(self._SignUpXPath)
 
     def getProductBtnButtonWE(self):
         return self.driver.find_element(By.XPATH, self._productBtnXPath)

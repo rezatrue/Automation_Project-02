@@ -16,6 +16,8 @@ class TestSearchProducts:
     @pytest.mark.parametrize('key', [('shirt')])
     def test_search_product(self, key):
         pp = self.hp.clickOnProductBtn()
+        if pp.url != pp.getCurrentUrl():
+            pp.driver.get(pp.url)
         pp.searchProduct(key)
         produts = pp.getProductsList()
 

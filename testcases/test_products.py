@@ -18,6 +18,8 @@ class TestProducts:
 
     def test_add_products(self):
         pp = self.hp.clickOnProductBtn()
+        if pp.getPageUrl() != pp.getCurrentUrl():
+            pp.driver.get(pp.getPageUrl())
         we = pp.hoverOverOnNthImage(0)
         pp.clickOnAddToCart(we)
         time.sleep(1)
@@ -34,5 +36,7 @@ class TestProducts:
 
     def test_remove_products(self):
         cp = CartPage(self.driver)
+        if cp.getPageUrl() != cp.getCurrentUrl():
+            cp.driver.get(cp.getPageUrl())
         cp.removeAllItemsfromCart()
         pass

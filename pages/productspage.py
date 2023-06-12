@@ -30,6 +30,9 @@ class ProductsPage(BaseDriver):
         self._displayProductHeaderXPath = "//h2[@class='title text-center']"
         pass
 
+
+    def getPageUrl(self):
+        return self.url
     def getProdutcsImageWrppersWE(self):
         return self.driver.find_elements(By.XPATH, self._productImageWrappersXPath)
     def getviewProductWE(self):

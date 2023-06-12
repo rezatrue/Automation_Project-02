@@ -1,7 +1,6 @@
 import time
 
 import pytest
-from ddt import data, unpack
 
 from pages.homepage import HomePage
 from pages.loginPage import LoginPage
@@ -21,6 +20,8 @@ class TestPlaceOrderRegisterWhileCheckout:
     def test_place_order(self):
         print("test_place_order")
         pp = self.hp.clickOnProductBtn()
+        if pp.getPageUrl() != pp.getCurrentUrl():
+            pp.driver.get(pp.getPageUrl())
         we = pp.hoverOverOnNthImage(0)
         pp.clickOnAddToCart(we)
         time.sleep(1)
@@ -41,6 +42,8 @@ class TestPlaceOrderRegisterWhileCheckout:
         print("test_register_login")
         actual = False
         lp = LoginPage(self.driver)
+        if lp.getPageUrl() != lp.getCurrentUrl():
+            lp.driver.get(lp.getPageUrl())
         if lp.isFormHeaderPresent():
             sp = lp.fillupSignupForm(test_data['name'], test_data['email'])
             if sp.isSignupFormPresent():
@@ -60,6 +63,8 @@ class TestPlaceOrderRegisterWhileCheckout:
     def test_check_out(self, card_name, card_number, cvc, ex_month, ex_year):
         print("test_check_out")
         cp = self.hp.clickOnCartBtn()
+        if cp.getPageUrl() != cp.getCurrentUrl():
+            cp.driver.get(cp.getPageUrl())
         cop = cp.clickOnProceedCheckoutBtn()
         payp = cop.clickOnPlacrOrderBtn()
         pdp = payp.submitPaymentInf(card_name, card_number, cvc, ex_month, ex_year)

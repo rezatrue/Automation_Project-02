@@ -16,12 +16,16 @@ class CartPage(BaseDriver):
     def __init__(self, driver):
         super().__init__(driver)
         self.addHandeler()
+        self._url = "https://automationexercise.com/view_cart"
         self._itemsXpath = "//tr[contains(@id,'product-')]"
         self._removeItemXpath = "//a[@class='cart_quantity_delete']"
         self._proceedCheckoutBtnXPath = "//*[@id='do_action']//a[@class='btn btn-default check_out']"
         # self._proceedCheckoutBtnXPath = "//*[@id='do_action']//a[contains(text(),'Proceed To Checkout')]"
         self._loginBtnXPath = "//*[@id='checkoutModal']//a[child::u[contains(text(),'Login')]]"
         pass
+
+    def getPageUrl(self):
+        return self._url
 
     def getItems(self):
         return self.driver.find_elements(By.XPATH, self._itemsXpath)
