@@ -133,7 +133,7 @@ class SignupPage(BaseDriver):
             self.log.info("Second Sign Up form submitted")
             return AccountCreatedPage(self.driver)
         except Exception as error:
-            print(error)
+            self.log.info(error)
             return None
 
         pass

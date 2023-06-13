@@ -1,3 +1,4 @@
+import logging
 import time
 
 import pytest
@@ -9,6 +10,7 @@ from utilities.utils import Utils
 
 @pytest.mark.usefixtures("setup")
 class TestProducts:
+    log = Utils.custom_logger(logLevel=logging.INFO)
 
     @pytest.fixture(autouse=True)
     def setUp(self):
@@ -17,6 +19,7 @@ class TestProducts:
         pass
 
     def test_add_products(self):
+        self.log.info("---------------->test_add_products")
         pp = self.hp.clickOnProductBtn()
         if pp.getPageUrl() != pp.getCurrentUrl():
             pp.driver.get(pp.getPageUrl())
@@ -35,8 +38,10 @@ class TestProducts:
         pass
 
     def test_remove_products(self):
+        self.log.info("---------------->test_remove_products")
         cp = CartPage(self.driver)
         if cp.getPageUrl() != cp.getCurrentUrl():
             cp.driver.get(cp.getPageUrl())
         cp.removeAllItemsfromCart()
+        assert True
         pass

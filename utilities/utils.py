@@ -1,13 +1,25 @@
 import logging
 import inspect
 
+import softest
 from openpyxl.utils import get_column_letter
 from openpyxl import load_workbook
 import json
 import csv
 
 
-class Utils:
+class Utils(softest.TestCase):
+
+    def assertListItemText(self, itemList, key):
+        for name in itemList:
+            self.log.info(f"Name: {name}")
+            if key in name:
+                self.soft_assert(self.assertTrue, True)
+            else:
+                self.soft_assert(self.assertTrue, False)
+
+            self.assert_all()
+        pass
 
     def assretTextCompare(self, expected, actual):
         assert (expected.lower() == actual.lower())
