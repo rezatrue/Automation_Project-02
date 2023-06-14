@@ -1,14 +1,13 @@
 import logging
 
 import pytest
-import softest
 
 from pages.homepage import HomePage
 from utilities.utils import Utils
 
 
 @pytest.mark.usefixtures("setup")
-class TestSearchProducts(softest.TestCase):
+class TestSearchProducts:
     log = Utils.custom_logger(logLevel=logging.INFO)
 
     @pytest.fixture(autouse=True)
@@ -38,6 +37,6 @@ class TestSearchProducts(softest.TestCase):
         for i in range(1, len(submenuList)+1):
             cat_name = pp.clickOnSubmenu("Men", i)
             header = pp.getProductHeader()
-            self.utils.assertListItemText(header, cat_name)
+            self.utils.assertListItemText([header], cat_name)
 
         pass

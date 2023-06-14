@@ -11,14 +11,15 @@ import csv
 class Utils(softest.TestCase):
 
     def assertListItemText(self, itemList, key):
+        # log = self.custom_logger()
         for name in itemList:
-            self.log.info(f"Name: {name}")
+            print(f"Name: {name}")
             if key in name:
                 self.soft_assert(self.assertTrue, True)
             else:
                 self.soft_assert(self.assertTrue, False)
 
-            self.assert_all()
+        self.assert_all()
         pass
 
     def assretTextCompare(self, expected, actual):
