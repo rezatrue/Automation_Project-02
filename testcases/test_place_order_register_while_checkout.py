@@ -63,7 +63,7 @@ class TestPlaceOrderRegisterWhileCheckout:
     @pytest.mark.dependency(depends=["test_place_order", "test_register_login"], scope='class')
     @pytest.mark.parametrize('card_name, card_number, cvc, ex_month, ex_year', [('Visa', '411111111111111111', '311', '02', '2027')])
     def test_check_out(self, card_name, card_number, cvc, ex_month, ex_year):
-        print("test_check_out")
+        self.log.info("----------------> test_check_out")
         cp = self.hp.clickOnCartBtn()
         if cp.getPageUrl() != cp.getCurrentUrl():
             cp.driver.get(cp.getPageUrl())

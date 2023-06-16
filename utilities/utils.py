@@ -11,26 +11,21 @@ import csv
 class Utils(softest.TestCase):
 
     def assertListItemText(self, itemList, key):
-        # log = self.custom_logger()
         for name in itemList:
-            print(f"Name: {name}")
-            if key in name:
-                self.soft_assert(self.assertTrue, True)
-            else:
-                self.soft_assert(self.assertTrue, False)
-
-        self.assert_all()
+            print(f"{key}: not in -> {name}")
+            self.soft_assert(self.assertTrue, key in name, f"{key}: not in -> {name}")
         pass
 
     def assretTextCompare(self, expected, actual):
         assert (expected.lower() == actual.lower())
         print("Assert pass")
 
+    @staticmethod
     def custom_logger(logLevel=logging.DEBUG):
         logger_name = inspect.stack()[1][3]
         logger = logging.getLogger(logger_name)
         logger.setLevel(logLevel)
-        fh = logging.FileHandler("../automation.log", mode='w')
+        fh = logging.FileHandler("./automation.log", mode='w')
         formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s : %(message)s')
         fh.setFormatter(formatter)
         logger.addHandler(fh)

@@ -120,6 +120,7 @@ class ProductsPage(BaseDriver):
         return self.driver.find_element(By.XPATH, self._displayProductHeaderXPath)
 
     def getProductHeader(self):
+        time.sleep(5)
         return self.getText(self.getDisplayProductHearWE())
     def getCategorySubmenuListWE(self, category):
         return self.driver.find_elements(By.XPATH, self._categorySubitemsXPath.format(category))
@@ -130,7 +131,9 @@ class ProductsPage(BaseDriver):
     def clickOnSubmenu(self, cat, num):
         self.driver.refresh() # need to use as item get slate
         self.clickOnWe(self.getCategoryMenWE())
-        self.clickOnWe(self.getCategorySubmenuWE(cat, num))
+        subItemWe = self.getCategorySubmenuWE(cat, num)
+        subItem = self.getText(subItemWe)
+        self.clickOnWe(subItemWe)
         time.sleep(5)
-        return self.getProductHeader()
+        return subItem
         pass
