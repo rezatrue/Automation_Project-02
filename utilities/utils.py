@@ -12,8 +12,8 @@ class Utils(softest.TestCase):
 
     def assertListItemText(self, itemList, key):
         for name in itemList:
-            print(f"{key}: not in -> {name}")
-            self.soft_assert(self.assertTrue, key in name, f"{key}: not in -> {name}")
+            print(f"{key}: --> {name}")
+            self.soft_assert(self.assertTrue, key in name, f"{key}: --> {name}")
         pass
 
     def assretTextCompare(self, expected, actual):
